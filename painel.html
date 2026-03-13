@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Acessos</title>
+  <style>
+    :root {
+      --bg: #102437;
+      --surface: rgba(255, 255, 255, 0.92);
+      --surface-strong: #ffffff;
+      --text: #163046;
+      --muted: #5f7285;
+      --accent: #c88a56;
+      --accent-soft: rgba(200, 138, 86, 0.12);
+      --border: rgba(22, 48, 70, 0.1);
+      --shadow: 0 20px 60px rgba(5, 18, 28, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(200, 138, 86, 0.35), transparent 28%),
+        linear-gradient(160deg, #0b1824 0%, #17334b 55%, #275d80 100%);
+      color: var(--text);
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    .hero {
+      color: white;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 3vw, 3.4rem);
+      font-family: Georgia, serif;
+      font-weight: 600;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 700px;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.6;
+    }
+
+    .panel,
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .panel {
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(220px, 1.2fr) repeat(3, minmax(150px, 0.55fr)) auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font: inherit;
+    }
+
+    input,
+    select {
+      background: var(--surface-strong);
+      color: var(--text);
+    }
+
+    button {
+      cursor: pointer;
+      background: linear-gradient(135deg, #d59b6a, #b16b3d);
+      color: white;
+      font-weight: 700;
+      border: 0;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      opacity: 0.94;
+    }
+
+    .status {
+      margin-top: 14px;
+      min-height: 24px;
+      color: var(--muted);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .summary-card {
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card h2 {
+      margin: 0 0 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .summary-card strong {
+      display: block;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--text);
+    }
+
+    .summary-card ul {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .summary-card li {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #8b562b;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .table-card {
+      overflow: hidden;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 960px;
+      background: var(--surface-strong);
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: #f6f8fa;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+    }
+
+    td small {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .empty {
+      padding: 24px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .controls,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        width: min(100% - 20px, 1180px);
+      }
+    }
+  </style>
+ </head>
+ <body>
+  <main>
+   <section class="hero">
+    <h1>Painel de acessos</h1>
+    <p>Consulta privada dos visitantes registrados no edge do Cloudflare. Os dados incluem IP, cidade, regiao, pais, rota acessada e horario do acesso.</p>
+   </section>
+
+   <section class="panel">
+    <div class="controls">
+     <div>
+      <label for="token">Token administrativo</label>
+      <input id="token" type="password" placeholder="Cole aqui o valor de ADMIN_TOKEN">
+     </div>
+     <div>
+      <label for="limit">Quantidade</label>
+      <select id="limit">
+       <option value="25">25 ultimos</option>
+       <option value="50" selected>50 ultimos</option>
+       <option value="100">100 ultimos</option>
+       <option value="200">200 ultimos</option>
+      </select>
+     </div>
+    <div>
+     <label for="country">Pais</label>
+     <select id="country">
+      <option value="">Todos</option>
+     </select>
+    </div>
+    <div>
+     <label for="start-date">De</label>
+     <input id="start-date" type="date">
+    </div>
+    <div>
+     <label for="end-date">Ate</label>
+     <input id="end-date" type="date">
+    </div>
+     <div>
+      <label>&nbsp;</label>
+      <button id="load">Carregar acessos</button>
+     </div>
+    </div>
+      <div class="hint">O painel exibe o IP mascarado. O valor completo permanece apenas no banco para contagem de visitantes unicos.</div>
+    <div id="status" class="status">Informe o token e carregue os dados.</div>
+   </section>
+
+   <section class="summary" id="summary" hidden>
+    <article class="summary-card">
+     <h2>Total de acessos</h2>
+     <strong id="total-accesses">0</strong>
+    </article>
+    <article class="summary-card">
+     <h2>Visitantes unicos por IP</h2>
+     <strong id="unique-visitors">0</strong>
+    </article>
+    <article class="summary-card">
+     <h2>Paises mais frequentes</h2>
+     <ul id="top-countries"></ul>
+    </article>
+   </section>
+
+   <section class="table-card">
+    <div class="table-wrap">
+     <table id="results" hidden>
+      <thead>
+       <tr>
+        <th>Quando</th>
+        <th>Quem</th>
+        <th>De onde</th>
+        <th>Rota</th>
+        <th>Rede</th>
+        <th>Navegador</th>
+       </tr>
+      </thead>
+      <tbody id="results-body"></tbody>
+     </table>
+    </div>
+    <div id="empty" class="empty">Nenhum acesso carregado ainda.</div>
+   </section>
+  </main>
+
+  <script>
+    const loadButton = document.getElementById('load');
+    const tokenInput = document.getElementById('token');
+    const limitInput = document.getElementById('limit');
+    const countryInput = document.getElementById('country');
+    const startDateInput = document.getElementById('start-date');
+    const endDateInput = document.getElementById('end-date');
+    const statusElement = document.getElementById('status');
+    const summaryElement = document.getElementById('summary');
+    const tableElement = document.getElementById('results');
+    const tableBodyElement = document.getElementById('results-body');
+    const emptyElement = document.getElementById('empty');
+    const totalAccessesElement = document.getElementById('total-accesses');
+    const uniqueVisitorsElement = document.getElementById('unique-visitors');
+    const topCountriesElement = document.getElementById('top-countries');
+
+    loadButton.addEventListener('click', loadAccesses);
+
+    async function loadAccesses() {
+      const token = tokenInput.value.trim();
+      const limit = limitInput.value;
+      const country = countryInput.value;
+      const startDate = startDateInput.value;
+      const endDate = endDateInput.value;
+
+      if (!token) {
+        statusElement.textContent = 'Informe o token administrativo antes de consultar.';
+        tokenInput.focus();
+        return;
+      }
+
+      if (startDate && endDate && startDate > endDate) {
+        statusElement.textContent = 'O periodo informado e invalido.';
+        return;
+      }
+
+      loadButton.disabled = true;
+      statusElement.textContent = 'Consultando os acessos registrados...';
+
+      try {
+        const params = new URLSearchParams({ limit });
+        if (country) {
+          params.set('country', country);
+        }
+        if (startDate) {
+          params.set('start', startDate);
+        }
+        if (endDate) {
+          params.set('end', endDate);
+        }
+
+        const response = await fetch(`/api/accessos?${params.toString()}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const payload = await response.json();
+
+        if (!response.ok) {
+          throw new Error(payload.error || 'Falha ao carregar os acessos.');
+        }
+
+        applyReturnedFilters(payload.filters || {});
+        renderCountryOptions(payload.options?.countries || []);
+        renderSummary(payload.summary);
+        renderRows(payload.items || []);
+        statusElement.textContent = buildStatusMessage(payload.items.length, payload.filters || {});
+      } catch (error) {
+        summaryElement.hidden = true;
+        tableElement.hidden = true;
+        emptyElement.hidden = false;
+        statusElement.textContent = error.message;
+      } finally {
+        loadButton.disabled = false;
+      }
+    }
+
+    function applyReturnedFilters(filters) {
+      countryInput.value = filters.country || '';
+      startDateInput.value = filters.start || '';
+      endDateInput.value = filters.end || '';
+    }
+
+    function renderCountryOptions(countries) {
+      const previousValue = countryInput.value;
+      countryInput.innerHTML = '<option value="">Todos</option>';
+
+      countries.forEach((country) => {
+        const option = document.createElement('option');
+        option.value = country;
+        option.textContent = country;
+        countryInput.appendChild(option);
+      });
+
+      if (countries.includes(previousValue)) {
+        countryInput.value = previousValue;
+      }
+    }
+
+    function renderSummary(summary) {
+      summaryElement.hidden = false;
+      totalAccessesElement.textContent = summary.totalAccesses || 0;
+      uniqueVisitorsElement.textContent = summary.uniqueVisitors || 0;
+      topCountriesElement.innerHTML = '';
+
+      const countries = summary.topCountries || [];
+      if (countries.length === 0) {
+        const item = document.createElement('li');
+        item.textContent = 'Sem dados';
+        topCountriesElement.appendChild(item);
+        return;
+      }
+
+      countries.forEach((entry) => {
+        const item = document.createElement('li');
+        item.textContent = `${entry.country}: ${entry.total}`;
+        topCountriesElement.appendChild(item);
+      });
+    }
+
+    function renderRows(items) {
+      tableBodyElement.innerHTML = '';
+
+      if (items.length === 0) {
+        tableElement.hidden = true;
+        emptyElement.hidden = false;
+        emptyElement.textContent = 'Nenhum acesso encontrado no banco.';
+        return;
+      }
+
+      tableElement.hidden = false;
+      emptyElement.hidden = true;
+
+      items.forEach((item) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            ${formatDate(item.visited_at)}
+            <small>Ray ID: ${escapeHtml(item.ray_id || '-')}</small>
+          </td>
+          <td>
+            ${escapeHtml(item.masked_ip || '-')}<nobr></nobr>
+            <small>${escapeHtml(item.referer || 'Acesso direto')}</small>
+          </td>
+          <td>
+            ${escapeHtml(formatLocation(item))}
+            <small>${escapeHtml(formatCoordinates(item))}</small>
+          </td>
+          <td>
+            ${escapeHtml(item.path || '-')}
+            <small>${escapeHtml(item.host || '-')} | ${escapeHtml(item.method || '-')}</small>
+          </td>
+          <td>
+            ${escapeHtml(item.as_organization || '-')}<nobr></nobr>
+            <small>ASN ${escapeHtml(String(item.asn || '-'))} | ${escapeHtml(item.colo || '-')}</small>
+          </td>
+          <td>${escapeHtml(item.user_agent || '-')}</td>
+        `;
+        tableBodyElement.appendChild(row);
+      });
+    }
+
+    function formatDate(value) {
+      if (!value) {
+        return '-';
+      }
+
+      return new Date(value).toLocaleString('pt-BR', {
+        dateStyle: 'short',
+        timeStyle: 'medium'
+      });
+    }
+
+    function formatLocation(item) {
+      const parts = [item.city, item.region, item.country].filter(Boolean);
+      return parts.length > 0 ? parts.join(', ') : 'Localizacao nao informada';
+    }
+
+    function buildStatusMessage(total, filters) {
+      const parts = [];
+
+      if (filters.country) {
+        parts.push(`pais ${filters.country}`);
+      }
+
+      if (filters.start || filters.end) {
+        const start = filters.start || 'o inicio';
+        const end = filters.end || 'hoje';
+        parts.push(`periodo de ${start} ate ${end}`);
+      }
+
+      if (parts.length === 0) {
+        return `Foram carregados ${total} acessos.`;
+      }
+
+      return `Foram carregados ${total} acessos com filtro de ${parts.join(' e ')}.`;
+    }
+
+    function formatCoordinates(item) {
+      if (item.latitude == null || item.longitude == null) {
+        return item.timezone || 'Sem coordenadas';
+      }
+
+      return `${item.latitude}, ${item.longitude} | ${item.timezone || 'Sem timezone'}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+  </script>
+ </body>
+</html>

@@ -1,11 +1,19 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "site",
   "compatibility_date": "2026-03-13",
+  "main": "./_worker.js",
 
   "assets": {
     "directory": "."
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "marceloecamiladb",
+      "database_id": "fb7e9077-b558-4eeb-8540-71b95ca858ae",
+      "migrations_dir": "./migrations"
+    }
+  ],
   "routes": [
     {
       "pattern": "marceloecamila.casamento.com",
