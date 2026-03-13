@@ -1,0 +1,422 @@
+
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcelo &amp; Camila</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Montserrat:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #2c5d80;
+      --color-surface: #ffffff;
+      --color-text: #2d2926;
+      --color-primary: #b08968;
+      --color-secondary: #d4a574;
+    }
+    
+    * {
+      scroll-behavior: smooth;
+    }
+    
+    .font-display {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .hero-gradient {
+      background: linear-gradient(180deg, 
+        rgba(176, 137, 104, 0.1) 0%, 
+        rgba(250, 248, 245, 0) 100%);
+    }
+    
+    .timeline-line {
+      background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+    }
+    
+    .card-shadow {
+      box-shadow: 0 4px 20px rgba(45, 41, 38, 0.08);
+    }
+    
+    .heart-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fade-in {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; opacity: 0; }
+    .delay-2 { animation-delay: 0.4s; opacity: 0; }
+    .delay-3 { animation-delay: 0.6s; opacity: 0; }
+    
+    .ornament {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 10 Q25 0 50 10 Q75 20 100 10' fill='none' stroke='%23b08968' stroke-width='1'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body" style="background-color: var(--color-bg); color: var(--color-text);">
+  <div class="w-full h-full overflow-auto">
+   <!-- Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#faf8f5]/90 border-b border-[#b08968]/10">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+     <span class="font-display text-xl" style="color: var(--color-primary);">M &amp; C</span>
+     <div class="hidden md:flex gap-8 text-sm tracking-wide">
+      <a href="#historia" class="hover:text-[#b08968] transition-colors">Nossa História</a> <a href="#pedido" class="hover:text-[#b08968] transition-colors">O Pedido</a> <a href="#presentes" class="hover:text-[#b08968] transition-colors">Presentes</a>
+     </div><button id="mobile-menu-btn" class="md:hidden p-2"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
+    </div><!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
+     <div class="flex flex-col gap-3 text-sm">
+      <a href="#historia" class="py-2 hover:text-[#b08968] transition-colors">Nossa História</a> <a href="#pedido" class="py-2 hover:text-[#b08968] transition-colors">O Pedido</a> <a href="#presentes" class="py-2 hover:text-[#b08968] transition-colors">Presentes</a>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section class="hero-gradient min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 pb-16">
+    <div class="animate-fade-in">
+     <div class="heart-float mb-6">
+      <svg class="w-16 h-16 mx-auto" style="color: #dba191;" viewbox="0 0 24 24" fill="currentColor">
+       <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+      </svg>
+     </div>
+    </div>
+    <h1 id="couple-names" class="font-display text-5xl md:text-7xl lg:text-8xl font-medium mb-4 animate-fade-in delay-1" style="color: #eae4cc;">Marcelo &amp; Camila</h1>
+    <div class="w-32 h-6 ornament my-4 animate-fade-in delay-2"></div>
+    <p id="wedding-date" class="font-body text-lg md:text-xl tracking-widest uppercase animate-fade-in delay-3" style="color: #dba191;">Vamos casar!</p><a href="#historia" class="mt-12 animate-bounce"> <i data-lucide="chevron-down" class="w-8 h-8" style="color: var(--color-primary);"></i> </a>
+   </section>
+   <div class="max-w-4xl mx-auto text-center py-20 px-4">
+     <div class="relative overflow-hidden rounded-lg shadow-lg">
+      <div class="flex transition-transform duration-500 ease-in-out" id="carousel">
+       <img src="img/IMG_9341.jpg" alt="Foto 1" class="w-full h-96 object-cover flex-shrink-0">
+       <img src="img/IMG_9477.jpg" alt="Foto 2" class="w-full h-96 object-cover flex-shrink-0">
+       <img src="img/IMG_9570.jpg" alt="Foto 3" class="w-full h-96 object-cover flex-shrink-0">
+       <img src="img/IMG_9300.jpg" alt="Foto 4" class="w-full h-96 object-cover flex-shrink-0">
+      </div>
+      <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full transition-all" onclick="prevSlide()" aria-label="Previous">
+       <i data-lucide="chevron-left" class="w-6 h-6"></i>
+      </button>
+      <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full transition-all" onclick="nextSlide()" aria-label="Next">
+       <i data-lucide="chevron-right" class="w-6 h-6"></i>
+      </button>
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+       <button class="w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-75 transition-all" onclick="goToSlide(0)"></button>
+       <button class="w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-75 transition-all" onclick="goToSlide(1)"></button>
+       <button class="w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-75 transition-all" onclick="goToSlide(2)"></button>
+       <button class="w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-75 transition-all" onclick="goToSlide(3)"></button>
+      </div>
+     </div>
+    </div><!-- Nossa História Section -->
+   <section id="historia" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="font-display text-4xl md:text-5xl text-center mb-4" style="color: #eae4cc;">Nossa História</h2>
+     <div class="w-24 h-1 mx-auto mb-16" style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"></div><!-- Timeline -->
+     <div class="relative">
+      <!-- Timeline Line -->
+      <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 timeline-line transform md:-translate-x-1/2"></div><!-- Timeline Item 1 -->
+      <div class="relative flex flex-col md:flex-row items-start mb-16">
+       <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
+        <div class="card-shadow p-6 rounded-2xl" style="background-color: var(--color-surface);">
+         <div class="flex items-center gap-2 mb-3 md:justify-end">
+          <i data-lucide="instagram" class="w-5 h-5" style="color: var(--color-primary);"></i> <span class="font-display text-xl" style="color: var(--color-primary);">O Início</span>
+         </div>
+         <p class="text-sm leading-relaxed opacity-80">Tudo começou de um jeito inesperado: um follow no Instagram. As conversas foram ficando cada vez mais frequentes, especialmente quando Marcelo estava prestes a embarcar para um intercâmbio na Irlanda. A distância física só aproximou os corações.</p>
+        </div>
+       </div>
+       <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center" style="background-color: var(--color-primary);">
+        <i data-lucide="heart" class="w-4 h-4 text-white"></i>
+       </div>
+      </div><!-- Timeline Item 2 -->
+      <div class="relative flex flex-col md:flex-row items-start mb-16">
+       <div class="md:w-1/2 md:ml-auto md:pl-12 pl-12">
+        <div class="card-shadow p-6 rounded-2xl" style="background-color: var(--color-surface);">
+         <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="video" class="w-5 h-5" style="color: var(--color-primary);"></i> <span class="font-display text-xl" style="color: var(--color-primary);">A Distância</span>
+         </div>
+         <p class="text-sm leading-relaxed opacity-80">Durante o intercâmbio, as conversas por mensagem viraram longas videochamadas. Cada ligação era uma forma de diminuir a distância entre Dublin e o Brasil, alimentando uma conexão que crescia a cada dia.</p>
+        </div>
+       </div>
+       <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center" style="background-color: var(--color-primary);">
+        <i data-lucide="plane" class="w-4 h-4 text-white"></i>
+       </div>
+      </div><!-- Timeline Item 3 -->
+      <div class="relative flex flex-col md:flex-row items-start">
+       <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
+        <div class="card-shadow p-6 rounded-2xl" style="background-color: var(--color-surface);">
+         <div class="flex items-center gap-2 mb-3 md:justify-end">
+          <i data-lucide="map-pin" class="w-5 h-5" style="color: var(--color-primary);"></i> <span class="font-display text-xl" style="color: var(--color-primary);">O Primeiro Encontro</span>
+         </div>
+         <p class="text-sm leading-relaxed opacity-80">Nas férias de Camila, surgiu a oportunidade perfeita. E foi assim que, no aeroporto de Dublin, Marcelo e Camila se viram pela primeira vez pessoalmente. Um abraço que esperaram por tanto tempo finalmente aconteceu.</p>
+        </div>
+       </div>
+       <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center" style="background-color: var(--color-primary);">
+        <i data-lucide="users" class="w-4 h-4 text-white"></i>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- O Pedido Section -->
+   <section id="pedido" class="py-20 px-4" style="background-color: var(--color-surface);">
+    <div class="max-w-4xl mx-auto text-center">
+     <h2 class="font-display text-4xl md:text-5xl mb-4">O Pedido</h2>
+     <div class="w-24 h-1 mx-auto mb-12" style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"></div>
+     <div class="card-shadow rounded-3xl p-8 md:p-12 mx-auto max-w-2xl" style="background: linear-gradient(135deg, rgba(176, 137, 104, 0.05) 0%, rgba(212, 165, 116, 0.1) 100%);">
+      <div class="mb-6">
+       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm" style="background-color: var(--color-primary); color: white;">
+        <i data-lucide="map-pin" class="w-4 h-4"></i> Madri, Espanha
+       </div>
+      </div>
+      <div class="mb-8">
+       <svg class="w-20 h-20 mx-auto mb-4" style="color: var(--color-secondary);" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2L9 9H2L7.5 14L5.5 22L12 17.5L18.5 22L16.5 14L22 9H15L12 2Z" />
+       </svg>
+      </div>
+      <p class="text-lg leading-relaxed opacity-80 mb-6">Foi no aniversário de 27 anos de Marcelo que Camila fez sua segunda viagem à Europa. E foi em Madri, na Espanha, em um restaurante especial, que Marcelo escolheu o momento perfeito para fazer o pedido de casamento.</p>
+      <p class="font-display text-2xl italic" style="color: var(--color-primary);">Ela disse SIM! 💍</p>
+     </div>
+    </div>
+   </section><!-- Presentes Section -->
+   <section id="presentes" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+     <h2 class="font-display text-4xl md:text-5xl mb-4" style="color: #eae4cc;">Lista de Presentes</h2>
+     <div class="w-24 h-1 mx-auto mb-8" style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"></div>
+     <p class="text-lg opacity-80 mb-12 max-w-xl mx-auto" style="color: #eae4cc;">Se desejar nos presentear, ficaremos muito felizes em receber sua contribuição via PIX ou Crédito.</p>
+     <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <!-- PIX Card -->
+      <div class="card-shadow rounded-2xl p-8 transition-transform hover:scale-105" style="background-color: var(--color-surface);">
+       <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background-color: rgba(176, 137, 104, 0.1);">
+        <svg class="w-8 h-8" style="color: var(--color-primary);" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M11.07 11.78L7.64 8.35a1.52 1.52 0 0 0-2.15 0l-.71.71a1.52 1.52 0 0 0 0 2.15l3.43 3.43a1.52 1.52 0 0 0 2.15 0l.71-.71a1.52 1.52 0 0 0 0-2.15zm5.29-3.43a1.52 1.52 0 0 0-2.15 0l-.71.71a1.52 1.52 0 0 0 0 2.15l3.43 3.43a1.52 1.52 0 0 1 0 2.15l-.71.71a1.52 1.52 0 0 1-2.15 0L10.64 14a1.52 1.52 0 0 0-2.15 0l-.71.71a1.52 1.52 0 0 0 0 2.15l3.43 3.43a1.52 1.52 0 0 0 2.15 0l3.43-3.43a1.52 1.52 0 0 0 0-2.15l-3.43-3.43a1.52 1.52 0 0 1 0-2.15l.71-.71a1.52 1.52 0 0 1 2.15 0l3.43 3.43a1.52 1.52 0 0 0 2.15 0l.71-.71a1.52 1.52 0 0 0 0-2.15l-3.43-3.43z" />
+        </svg>
+       </div>
+       <h3 class="font-display text-2xl mb-3">PIX</h3>
+       <p id="pix-key" class="font-mono text-lg mb-4 px-4 py-2 rounded-lg" style="background-color: rgba(176, 137, 104, 0.1); color: var(--color-primary);">11953406754</p><button id="copy-pix" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white transition-all hover:opacity-90 active:scale-95" style="background-color: var(--color-primary);"> <i data-lucide="copy" class="w-4 h-4"></i> Copiar Chave </button>
+       <p id="copy-feedback" class="text-sm mt-2 opacity-0 transition-opacity" style="color: var(--color-primary);">Copiado!</p>
+      </div><!-- Credit Card -->
+      <div class="card-shadow rounded-2xl p-8 transition-transform hover:scale-105" style="background-color: var(--color-surface);">
+       <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background-color: rgba(176, 137, 104, 0.1);">
+        <i data-lucide="credit-card" class="w-8 h-8" style="color: var(--color-primary);"></i>
+       </div>
+       <h3 class="font-display text-2xl mb-3">Cartão de Crédito</h3>
+       <p class="text-sm opacity-70 mb-4">Contribua usando seu cartão de crédito pelo Mercado Pago</p><a href="https://link.mercadopago.com.br/marceloecamila" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white transition-all hover:opacity-90 active:scale-95" style="background-color: var(--color-primary);"> <i data-lucide="external-link" class="w-4 h-4"></i> Presentear </a>
+      </div>
+     </div>
+    </div>
+   </section><!-- Quote Section -->
+   <section class="py-20 px-4" style="background: linear-gradient(180deg, var(--color-surface) 0%, rgba(176, 137, 104, 0.1) 100%);">
+    <div class="max-w-3xl mx-auto text-center">
+     <svg class="w-12 h-12 mx-auto mb-8 opacity-30" viewbox="0 0 24 24" fill="currentColor">
+      <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
+     </svg>
+     <blockquote class="font-display text-2xl md:text-3xl lg:text-4xl italic leading-relaxed mb-8" style="color: var(--color-text);">
+      "O amor nunca falha. Ele sempre protege, sempre confia, sempre espera, sempre persevera."
+     </blockquote><cite class="text-lg font-medium" style="color: var(--color-text);"> — 1 Coríntios 13:8 </cite>
+     <div class="mt-12 flex justify-center gap-2">
+      <span class="w-2 h-2 rounded-full" style="background-color: var(--color-primary);"></span> <span class="w-2 h-2 rounded-full" style="background-color: var(--color-secondary);"></span> <span class="w-2 h-2 rounded-full" style="background-color: var(--color-primary);"></span>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-12 px-4 text-center" style="background-color: var(--color-text); color: var(--color-bg);">
+    <p class="font-display text-3xl mb-4" style="color: #eae4cc;">Marcelo &amp; Camila</p>
+    <div class="flex justify-center gap-1 mb-6">
+     <i data-lucide="heart" class="w-4 h-4" style="color: var(--color-secondary);"></i> <i data-lucide="heart" class="w-4 h-4" style="color: var(--color-primary);"></i> <i data-lucide="heart" class="w-4 h-4" style="color: var(--color-secondary);"></i>
+    </div>
+    <p class="text-sm opacity-60">Feito com amor</p>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      couple_names: 'Marcelo & Camila',
+      wedding_date: 'Vamos casar!',
+      pix_key: '11953406754',
+      background_color: '#2c5d80',
+      surface_color: '#ffffff',
+      text_color: '#2d2926',
+      primary_color: '#b08968',
+      secondary_color: '#d4a574',
+      font_family: 'Cormorant Garamond',
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      // Update text content
+      document.getElementById('couple-names').textContent = config.couple_names || defaultConfig.couple_names;
+      document.getElementById('wedding-date').textContent = config.wedding_date || defaultConfig.wedding_date;
+      document.getElementById('pix-key').textContent = config.pix_key || defaultConfig.pix_key;
+
+      // Update colors
+      const root = document.documentElement;
+      root.style.setProperty('--color-bg', config.background_color || defaultConfig.background_color);
+      root.style.setProperty('--color-surface', config.surface_color || defaultConfig.surface_color);
+      root.style.setProperty('--color-text', config.text_color || defaultConfig.text_color);
+      root.style.setProperty('--color-primary', config.primary_color || defaultConfig.primary_color);
+      root.style.setProperty('--color-secondary', config.secondary_color || defaultConfig.secondary_color);
+
+      // Update font family
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      document.querySelectorAll('.font-display').forEach(el => {
+        el.style.fontFamily = `${fontFamily}, serif`;
+      });
+
+      // Update font size
+      const baseSize = config.font_size || defaultConfig.font_size;
+      document.body.style.fontSize = `${baseSize}px`;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => { config.surface_color = value; window.elementSdk.setConfig({ surface_color: value }); }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => { config.secondary_color = value; window.elementSdk.setConfig({ secondary_color: value }); }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => { config.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => { config.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['couple_names', config.couple_names || defaultConfig.couple_names],
+        ['wedding_date', config.wedding_date || defaultConfig.wedding_date],
+        ['pix_key', config.pix_key || defaultConfig.pix_key]
+      ]);
+    }
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Copy PIX functionality
+    const copyPixBtn = document.getElementById('copy-pix');
+    const copyFeedback = document.getElementById('copy-feedback');
+    const pixKeyElement = document.getElementById('pix-key');
+
+    copyPixBtn.addEventListener('click', async () => {
+      const pixKey = pixKeyElement.textContent;
+      try {
+        await navigator.clipboard.writeText(pixKey);
+        copyFeedback.style.opacity = '1';
+        setTimeout(() => {
+          copyFeedback.style.opacity = '0';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+
+    // Carousel functionality
+    let currentSlide = 0;
+    const carousel = document.getElementById('carousel');
+    const totalSlides = 4;
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+      // Update indicators
+      const indicators = document.querySelectorAll('.absolute.bottom-4 button');
+      indicators.forEach((indicator, index) => {
+        if (index === currentSlide) {
+          indicator.classList.add('bg-opacity-100');
+          indicator.classList.remove('bg-opacity-50');
+        } else {
+          indicator.classList.add('bg-opacity-50');
+          indicator.classList.remove('bg-opacity-100');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(slideIndex) {
+      currentSlide = slideIndex;
+      updateCarousel();
+    }
+
+    // Initialize carousel
+    updateCarousel();
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9db79901f57ef1e3',t:'MTc3MzM2ODgyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
