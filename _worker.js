@@ -13,7 +13,7 @@ export default {
     const response = await env.ASSETS.fetch(request);
 
     if (shouldLogRequest(request, response, url.pathname)) {
-      ctx.waitUntil(logAccess(request, env, url));
+      ctx.waitUntil(logAccess(request, env));
     }
 
     return response;
@@ -37,7 +37,7 @@ function shouldLogRequest(request, response, pathname) {
   return contentType.includes("text/html");
 }
 
-async function logAccess(request, env, url) {
+async function logAccess(request, env) {
   if (!env.DB) {
     return;
   }
@@ -45,49 +45,16 @@ async function logAccess(request, env, url) {
   const cf = request.cf || {};
   const headers = request.headers;
   const ip = headers.get("CF-Connecting-IP") || headers.get("x-forwarded-for") || null;
-  const latitude = toNullableNumber(cf.latitude);
-  const longitude = toNullableNumber(cf.longitude);
-  const asn = toNullableNumber(cf.asn);
 
   await env.DB.prepare(
-    `INSERT INTO access_logs (
-      visited_at,
-      host,
-      path,
-      method,
-      ip,
-      country,
-      region,
-      city,
-      colo,
-      timezone,
-      latitude,
-      longitude,
-      asn,
-      as_organization,
-      user_agent,
-      referer,
-      ray_id
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    `INSERT INTO access_logs (ip, country, city, user_agent)
+     VALUES (?, ?, ?, ?)`
   )
     .bind(
-      new Date().toISOString(),
-      url.host,
-      url.pathname,
-      request.method,
       ip,
       cf.country || null,
-      cf.region || null,
       cf.city || null,
-      cf.colo || null,
-      cf.timezone || null,
-      latitude,
-      longitude,
-      asn,
-      cf.asOrganization || null,
-      headers.get("user-agent"),
-      headers.get("referer"),
-      headers.get("cf-ray")
+      headers.get("user-agent") || null
     )
     .run();
 }
@@ -132,26 +99,14 @@ async function handleAccessApi(request, env) {
     env.DB.prepare(
       `SELECT
         id,
-        visited_at,
-        host,
-        path,
-        method,
+        created_at,
         ip,
         country,
-        region,
         city,
-        colo,
-        timezone,
-        latitude,
-        longitude,
-        asn,
-        as_organization,
-        user_agent,
-        referer,
-        ray_id
+        user_agent
       FROM access_logs
       ${filters.whereClause}
-      ORDER BY datetime(visited_at) DESC
+      ORDER BY created_at DESC
       LIMIT ?`
     ).bind(...filters.values, limit).all(),
     env.DB.prepare(
@@ -178,9 +133,12 @@ async function handleAccessApi(request, env) {
   ]);
 
   const items = (rowsResult.results || []).map((row) => ({
-    ...row,
-    ip: undefined,
-    masked_ip: maskIp(row.ip)
+    id: row.id,
+    created_at: row.created_at,
+    masked_ip: maskIp(row.ip),
+    country: row.country,
+    city: row.city,
+    user_agent: row.user_agent
   }));
 
   return json({
@@ -312,11 +270,3 @@ function json(body, status = 200) {
   });
 }
 
-function toNullableNumber(value) {
-  if (value === undefined || value === null || value === "") {
-    return null;
-  }
-
-  const number = Number(value);
-  return Number.isFinite(number) ? number : null;
-}
